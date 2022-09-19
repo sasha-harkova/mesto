@@ -1,0 +1,12 @@
+.profile__username-container {
+  min-width: 336px;
+  margin: 22px 0 8px;
+  display: flex;
+}
+
+@media screen and (max-width: 950px) {
+  .profile__username-container {
+    min-width: 282px;
+    margin: 0;
+  }
+}

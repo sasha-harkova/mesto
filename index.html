@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" type="text/css" href="./pages/index.css">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <img class="header__logo" src="./images/header_logo.svg" alt="Логотип Mesto Russia">
+    </header>
+    <section class="profile">
+      <img class="profile__avatar" src="./images/сousteau.png" alt="Аватар Жак-Ив-Кусто">
+      <div class="profile__info-container">
+        <div class="profile__username-container">
+          <h1 class="profile__username">Жак-Ив Кусто</h1>
+          <img class="profile__edit-button" src="./images/edit.svg" alt="Кнопка редактирования профиля">
+        </div>
+        <p class="profile__user-description">Исследователь океана</p>
+      </div>
+      <button class="profile__add-button"></button>
+    </section>
+    <section class="content">
+      <div class="content__card">
+        <img class="content__photo" src="./images/karachaevsk.png" alt="Храм на фоне гор в Карачаевске">
+        <div class="content__like-container">
+          <p class="content__place-name">Карачаевск</p>
+          <img class="content__like content__like_active" src="./images/like.svg" alt="Отметка 'Нравится'">
+        </div>
+      </div>
+      <div class="content__card">
+        <img class="content__photo" src="./images/elbrus.png" alt="Гора Эльбрус на рассвете">
+        <div class="content__like-container">
+          <p class="content__place-name">Гора Эльбрус</p>
+          <img class="content__like content__like_active" src="./images/like.svg" alt="Отметка 'Нравится'">
+        </div>
+      </div>
+      <div class="content__card">
+        <img class="content__photo" src="./images/dombay.png" alt="Домбай в тучах">
+        <div class="content__like-container">
+          <p class="content__place-name">Домбай</p>
+          <img class="content__like content__like_active" src="./images/like.svg" alt="Отметка 'Нравится'">
+        </div>
+      </div>
+      <div class="content__card">
+        <img class="content__photo" src="./images/gumbashi_pass.jpg" alt="Перевал Гумбаши в тумане">
+        <div class="content__like-container">
+          <p class="content__place-name">Перевал Гумбаши</p>
+          <img class="content__like content__like_active" src="./images/like.svg" alt="Отметка 'Нравится'">
+        </div>
+      </div>
+      <div class="content__card">
+        <img class="content__photo" src="./images/kara_kel.jpg" alt="Озеро Кара-Кель и горы">
+        <div class="content__like-container">
+          <p class="content__place-name">Озеро Кара-Кель</p>
+          <img class="content__like content__like_active" src="./images/like.svg" alt="Отметка 'Нравится'">
+        </div>
+      </div>
+      <div class="content__card">
+        <img class="content__photo" src="./images/plateau_bermamit.jpg" alt="Плато Бермамыт в солнечную погоду">
+        <div class="content__like-container">
+          <p class="content__place-name">Плато Бермамыт</p>
+          <img class="content__like content__like_active" src="./images/like.svg" alt="Отметка 'Нравится'">
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+    </footer>
+    <div class="popup">
+      <form class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <fieldset class="popup__form">
+          <input class="popup__form-item popup__form-item_name" type="text" placeholder="Введите имя" value="Жак-Ив Кусто">
+          <input class="popup__form-item popup__form-item_job" type="text" placeholder="Расскажите о себе" value="Исследователь океана">
+        </fieldset>
+        <button class="popup__save-button" type="submit">Сохранить</button>
+        <img class="popup__close-button" src="./images/close_icon.svg" alt="Кнопка закрытия формы">
+      </form>
+    </div>
+  </div>
+
+  <script src="./index.js"></script>
+</body>
+</html>

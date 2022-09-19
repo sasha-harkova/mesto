@@ -1,0 +1,5 @@
+.content__like-container {
+  margin: 20px 21px 26px;
+  display: flex;
+  justify-content: space-between;
+}
