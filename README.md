@@ -1,9 +1,9 @@
 # Project: Mesto
 
-This is a social networking site where **you can post photos** of the most beautiful places in the world.
+This is a social networking site where **you can post photos, like them, delete them and edit your profile**.
 
 Here were used:
-* submitting a form for changing personal data;
+* basic JavaScript;
 * grid layout;
 * flexbox layout;
 * adaptive layout;
