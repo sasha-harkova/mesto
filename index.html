@@ -1,91 +1,141 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mesto</title>
-  <link rel="stylesheet" type="text/css" href="./pages/index.css">
-</head>
-<body>
-  <div class="page">
-    <header class="header">
-      <img class="header__logo" src="./images/header_logo.svg" alt="Логотип Mesto Russia">
-    </header>
-    <main class="main">
-      <section class="profile">
-        <img class="profile__avatar" src="./images/сousteau.png" alt="Аватар Жак-Ив-Кусто">
-        <div class="profile__info-container">
-          <div class="profile__username-container">
-            <h1 class="profile__username">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button" aria-label="Редактировать профиль" type="button"></button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mesto</title>
+    <link rel="stylesheet" type="text/css" href="./pages/index.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <img
+          class="header__logo"
+          src="./images/header_logo.svg"
+          alt="Логотип Mesto Russia"
+        />
+      </header>
+      <main class="main">
+        <section class="profile">
+          <img
+            class="profile__avatar"
+            src="./images/сousteau.png"
+            alt="Аватар Жак-Ив-Кусто"
+          />
+          <div class="profile__info-container">
+            <div class="profile__username-container">
+              <h1 class="profile__username">Жак-Ив Кусто</h1>
+              <button
+                class="profile__edit-button"
+                aria-label="Редактировать профиль"
+                type="button"
+              ></button>
+            </div>
+            <p class="profile__user-description">Исследователь океана</p>
           </div>
-          <p class="profile__user-description">Исследователь океана</p>
+          <button
+            class="profile__add-button"
+            aria-label="Добавить изображение"
+            type="button"
+          ></button>
+        </section>
+        <section class="content"></section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+      </footer>
+
+      <div class="popup">
+        <div class="popup__container">
+          <form class="popup__form" name="edit-profile">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <fieldset class="popup__form-items">
+              <input
+                class="popup__form-item popup__form-item_el_name"
+                type="text"
+                placeholder="Введите имя"
+                value=""
+              />
+              <input
+                class="popup__form-item popup__form-item_el_job"
+                type="text"
+                placeholder="Расскажите о себе"
+                value=""
+              />
+            </fieldset>
+            <button class="popup__save-button" type="submit">Сохранить</button>
+          </form>
+          <button
+            class="popup__close-button"
+            aria-label="Закрыть"
+            type="button"
+          ></button>
         </div>
-        <button class="profile__add-button" aria-label="Добавить изображение" type="button"></button>
-      </section>
-      <section class="content">
-        <div class="content__card">
-          <img class="content__photo" src="./images/karachaevsk.png" alt="Храм на фоне гор в Карачаевске">
-          <div class="content__like-container">
-            <p class="content__place-name">Карачаевск</p>
-            <button class="content__like content__like_active" aria-label="Поставить лайк" type="button"></button>
-          </div>
+      </div>
+
+      <div class="popup">
+        <div class="popup__container">
+          <form class="popup__form" name="add-photo">
+            <h2 class="popup__title">Новое место</h2>
+            <fieldset class="popup__form-items">
+              <input
+                class="popup__form-item popup__form-item_el_place-name"
+                type="text"
+                placeholder="Название"
+                value=""
+              />
+              <input
+                class="popup__form-item popup__form-item_el_link"
+                type="text"
+                placeholder="Ссылка на картинку"
+                value=""
+              />
+            </fieldset>
+            <button class="popup__save-button" type="submit">Создать</button>
+          </form>
+          <button
+            class="popup__close-button"
+            aria-label="Закрыть"
+            type="button"
+          ></button>
         </div>
-        <div class="content__card">
-          <img class="content__photo" src="./images/elbrus.png" alt="Гора Эльбрус на рассвете">
-          <div class="content__like-container">
-            <p class="content__place-name">Гора Эльбрус</p>
-            <button class="content__like content__like_active" aria-label="Поставить лайк" type="button"></button>
-          </div>
-        </div>
-        <div class="content__card">
-          <img class="content__photo" src="./images/dombay.png" alt="Домбай в тучах">
-          <div class="content__like-container">
-            <p class="content__place-name">Домбай</p>
-            <button class="content__like content__like_active" aria-label="Поставить лайк" type="button"></button>
-          </div>
-        </div>
-        <div class="content__card">
-          <img class="content__photo" src="./images/gumbashi_pass.jpg" alt="Перевал Гумбаши в тумане">
-          <div class="content__like-container">
-            <p class="content__place-name">Перевал Гумбаши</p>
-            <button class="content__like content__like_active" aria-label="Поставить лайк" type="button"></button>
-          </div>
-        </div>
-        <div class="content__card">
-          <img class="content__photo" src="./images/kara_kel.jpg" alt="Озеро Кара-Кель и горы">
-          <div class="content__like-container">
-            <p class="content__place-name">Озеро Кара-Кель</p>
-            <button class="content__like content__like_active" aria-label="Поставить лайк" type="button"></button>
-          </div>
-        </div>
-        <div class="content__card">
-          <img class="content__photo" src="./images/plateau_bermamit.jpg" alt="Плато Бермамыт в солнечную погоду">
-          <div class="content__like-container">
-            <p class="content__place-name">Плато Бермамыт</p>
-            <button class="content__like content__like_active" aria-label="Поставить лайк" type="button"></button>
-          </div>
-        </div>
-      </section>
-    </main>
-    <footer class="footer">
-      <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
-    </footer>
-    <div class="popup">
-      <div class="popup__container">
-        <form class="popup__form" name="edit-profile">
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <fieldset class="popup__form-items">
-            <input class="popup__form-item popup__form-item_el_name" type="text" placeholder="Введите имя" value="Жак-Ив Кусто">
-            <input class="popup__form-item popup__form-item_el_job" type="text" placeholder="Расскажите о себе" value="Исследователь океана">
-          </fieldset>
-          <button class="popup__save-button" type="submit">Сохранить</button>
-        </form>
-        <button class="popup__close-button" aria-label="Закрыть" type="button"></button>
+      </div>
+
+      <div class="popup popup_for-image">
+        <figure class="popup__container-image">
+          <img class="popup__image" src="" alt="Фото в полноэкранном режиме" />
+          <figcaption class="popup__place-name"></figcaption>
+          <button
+            class="popup__close-button"
+            aria-label="Закрыть"
+            type="button"
+          ></button>
+        </figure>
       </div>
     </div>
-  </div>
-  <script defer src="./scripts/index.js"></script>
-</body>
+
+    <template class="template-add-photo">
+      <div class="content__card">
+        <img class="content__photo" src="" alt="" />
+        <div class="content__like-container">
+          <p class="content__place-name"></p>
+          <button
+            class="content__like"
+            aria-label="Поставить лайк на фото"
+            type="button"
+          ></button>
+        </div>
+        <button
+          class="content__delete"
+          aria-label="Удалить фото"
+          type="button"
+        ></button>
+      </div>
+    </template>
+
+    <script defer src="./scripts/cards.js"></script>
+    <script defer src="./scripts/index.js"></script>
+  </body>
 </html>
+Z
