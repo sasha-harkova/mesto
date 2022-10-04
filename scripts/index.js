@@ -16,9 +16,9 @@ const newCardForm = document.querySelector('form[name="add-photo"]');
 const placeName = document.querySelector(".popup__form-item_el_place-name");
 const linkPhoto = document.querySelector(".popup__form-item_el_link");
 const templateAddPhoto = document.querySelector(".template-add-photo").content;
-const contentCard = templateAddPhoto.querySelector(".content__card");
-const contentPlaceName = contentCard.querySelector(".content__place-name");
-const contentPhoto = contentCard.querySelector(".content__photo");
+// const contentCard = templateAddPhoto.querySelector(".content__card");
+// const contentPlaceName = contentCard.querySelector(".content__place-name");
+// const contentPhoto = contentCard.querySelector(".content__photo");
 const popupImage = document.querySelector(".popup__image");
 const popupPlaceName = document.querySelector(".popup__place-name");
 
@@ -78,27 +78,29 @@ function handleOpenPhoto(evt) {
 }
 
 
-function createCard() {
-  const newCard = contentCard.cloneNode(true);
+function createCard(photo, caption) {
+  const contentCard = templateAddPhoto.querySelector(".content__card").cloneNode(true);
+  const contentPlaceName = contentCard.querySelector(".content__place-name");
+  const contentPhoto = contentCard.querySelector(".content__photo");
 
-  newCard.querySelector(".content__like").addEventListener("click", handleAddLike);
-  newCard.querySelector(".content__delete").addEventListener("click", handleDeleteCard);
-  newCard.querySelector(".content__photo").addEventListener("click", handleOpenPhoto);
+  contentPhoto.src = photo;
+  contentPhoto.alt = caption + ". Иллюстрация.";
+  contentPlaceName.textContent = caption;
 
-  return newCard;
+  contentCard.querySelector(".content__like").addEventListener("click", handleAddLike);
+  contentCard.querySelector(".content__delete").addEventListener("click", handleDeleteCard);
+  contentCard.querySelector(".content__photo").addEventListener("click", handleOpenPhoto);
+
+  return contentCard;
 }
 
-function renderCard() {
-  content.prepend(createCard());
+function renderCard(photo, caption) {
+  content.prepend(createCard(photo, caption));
 }
 
 function addCardFromArray() {
   initialCards.forEach((item) => {
-    contentPlaceName.textContent = item.name;
-    contentPhoto.src = item.link;
-    contentPhoto.alt = item.name + ". Иллюстрация.";
-
-    renderCard();
+    renderCard(item.link, item.name)
   });
 }
 addCardFromArray();
@@ -106,11 +108,7 @@ addCardFromArray();
 
 function handleAddNewCard(evt) {
   evt.preventDefault();
-
-  contentPlaceName.textContent = placeName.value;
-  contentPhoto.src = linkPhoto.value;
-  contentPhoto.alt = placeName.value + ". Иллюстрация.";
-  renderCard();
+  renderCard(linkPhoto.value, placeName.value);
   closeEachPopup();
 }
 
