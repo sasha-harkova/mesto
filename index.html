@@ -48,21 +48,23 @@
 
       <div class="popup popup_edit-profile">
         <div class="popup__container">
-          <form class="popup__form" name="edit-profile">
+          <form class="popup__form" name="edit" novalidate>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <fieldset class="popup__form-items">
-              <input
-                class="popup__form-item popup__form-item_el_name"
+            <fieldset class="popup__inputs">
+              <input required minlength="2" maxlength="40" id="username" name="username"
+                class="popup__input popup__input_el_name"
                 type="text"
                 placeholder="Введите имя"
                 value=""
               />
-              <input
-                class="popup__form-item popup__form-item_el_job"
+              <span class="popup__error" id="username-error"></span>
+              <input required minlength="2" maxlength="200" id="about" name="about"
+                class="popup__input popup__input_el_job"
                 type="text"
                 placeholder="Расскажите о себе"
                 value=""
               />
+              <span class="popup__error" id="about-error"></span>
             </fieldset>
             <button class="popup__save-button" type="submit">Сохранить</button>
           </form>
@@ -76,21 +78,23 @@
 
       <div class="popup popup_add-card">
         <div class="popup__container">
-          <form class="popup__form" name="add-photo">
+          <form class="popup__form" name="addphoto" novalidate>
             <h2 class="popup__title">Новое место</h2>
-            <fieldset class="popup__form-items">
-              <input
-                class="popup__form-item popup__form-item_el_place-name"
+            <fieldset class="popup__inputs">
+              <input required minlength="2" maxlength="30" id="cardname" name="cardname"
+                class="popup__input popup__input_el_place-name"
                 type="text"
                 placeholder="Название"
                 value=""
               />
-              <input
-                class="popup__form-item popup__form-item_el_link"
-                type="text"
+              <span class="popup__error" id="cardname-error"></span>
+              <input required id="cardlink" name="cardlink"
+                class="popup__input popup__input_el_link"
+                type="url"
                 placeholder="Ссылка на картинку"
                 value=""
               />
+              <span class="popup__error" id="cardlink-error">добавь ссылку</span>
             </fieldset>
             <button class="popup__save-button" type="submit">Создать</button>
           </form>
@@ -136,6 +140,7 @@
     </template>
 
     <script defer src="./scripts/cards.js"></script>
+    <script defer src="./scripts/validate.js"></script>
     <script defer src="./scripts/index.js"></script>
   </body>
 </html>
