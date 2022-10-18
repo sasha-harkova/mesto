@@ -28,24 +28,14 @@
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__inputs/popup__inputs.css);
 @import url(../blocks/popup/__input/popup__input.css);
+@import url(../blocks/popup/__input/_type/_error/popup__input_type_error.css);
 @import url(../blocks/popup/__save-button/popup__save-button.css);
 @import url(../blocks/popup/__save-button/_disabled/popup__save-button_disabled.css);
 @import url(../blocks/popup/__container-image/popup__container-image.css);
 @import url(../blocks/popup/__image/popup__image.css);
 @import url(../blocks/popup/__place-name/popup__place-name.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
-
-.popup__input_type_error {
-  margin: 0;
-  border-bottom: 1px solid #FF0000;
-}
-
-.popup__error_visible {
-  min-height: 30px;
-  font-size: 12px;
-  line-height: 15px;
-  color: #FF0000;
-}
+@import url(../blocks/popup/__error/_visible/popup__error_visible.css);
 
 
 
