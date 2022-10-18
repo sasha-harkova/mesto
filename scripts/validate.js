@@ -66,6 +66,7 @@ function hasInvalidInput(inputList) {
 
 function deactivateButton(buttonElement) {
   buttonElement.classList.add(`${objForValidation.inactiveButtonClass}`);
+  buttonElement.setAttribute("disabled", "disabled");
 };
 
 function handleDeactivateButtonAtForm(evt) {
@@ -78,5 +79,6 @@ function toggleButtonState(inputList, buttonElement) {
     deactivateButton(buttonElement);
   } else {
     buttonElement.classList.remove(`${objForValidation.inactiveButtonClass}`);
+    buttonElement.removeAttribute("disabled", "disabled");
   }
 };

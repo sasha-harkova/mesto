@@ -38,13 +38,11 @@ function openPopupEditProfile() {
 
 function openPopupAddCard() {
   openPopup(popupAddCard);
-  newCardForm.reset();
   clearInputError(popupAddCard);
 };
 
 function openPopupEditAvatar() {
   openPopup(popupEditAvatar);
-  newAvatarForm.reset();
   clearInputError(popupEditAvatar);
 };
 
@@ -59,7 +57,7 @@ function closeEachPopup() {
 
 function handleClosePopupByClickingOverlay(evt) {
   if (evt.target == evt.currentTarget) {
-    closeEachPopup();
+    closePopup(evt.target);
   }
 };
 
@@ -77,22 +75,25 @@ function handleEditAvatar(evt) {
   avatar.src = linkForNewAvatar.value;
   closeEachPopup();
   handleDeactivateButtonAtForm(evt);
+  newAvatarForm.reset();
 }
 
-function setEventListenersToCard(evt) {
-  const eventTarget = evt.target;
-    if (eventTarget.classList.contains("content__like")) {
-      eventTarget.classList.toggle("content__like_active");
-    };
-    if (eventTarget.classList.contains("content__delete")) {
-      eventTarget.closest(".content__card").remove();
-    };
-    if (eventTarget.classList.contains("content__photo")) {
-      popupImage.src = eventTarget.src;
-      popupPlaceName.textContent = eventTarget.alt.replace(". Иллюстрация.", "");
-      openPopup(popupForImage);
-    };
-};
+function handleLikeIcon(evt) {
+    const eventTarget = evt.target;
+    eventTarget.classList.toggle("content__like_active");
+  }
+
+  function handleDeleteCard(evt) {
+    const eventTarget = evt.target.closest(".content__card");
+    eventTarget.remove();
+  }
+
+  function handlePreviewPicture(photo, caption) {
+    popupImage.src = photo.src;
+    popupImage.alt = photo.alt;
+    popupPlaceName.textContent = caption.textContent;
+    openPopup(popupForImage);
+  }
 
 function createCard(photo, caption) {
   const contentCard = templateAddPhoto.querySelector(".content__card").cloneNode(true);
@@ -100,10 +101,14 @@ function createCard(photo, caption) {
   const contentPhoto = contentCard.querySelector(".content__photo");
 
   contentPhoto.src = photo;
-  contentPhoto.alt = caption + ". Иллюстрация.";
+  contentPhoto.alt = `${caption}. Иллюстрация.`;
   contentPlaceName.textContent = caption;
 
-  contentCard.addEventListener("click", setEventListenersToCard);
+  contentCard.querySelector(".content__like").addEventListener("click", handleLikeIcon);
+  contentCard.querySelector(".content__delete").addEventListener("click", handleDeleteCard);
+  contentCard.querySelector(".content__photo").addEventListener("click", () => {
+    handlePreviewPicture(contentPhoto, contentPlaceName);
+  });
 
   return contentCard;
 };
@@ -125,6 +130,7 @@ function handleAddNewCard(evt) {
   renderCard(linkPhoto.value, placeName.value);
   closeEachPopup();
   handleDeactivateButtonAtForm(evt);
+  newCardForm.reset();
 };
 
 function closePopupByClickingEscape(evt) {
