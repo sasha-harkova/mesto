@@ -18,11 +18,13 @@
       </header>
       <main class="main">
         <section class="profile">
-          <img
+          <div class="profile__avatar-container">
+            <img
             class="profile__avatar"
             src="./images/сousteau.png"
-            alt="Аватар Жак-Ив-Кусто"
+            alt="Аватар пользователя"
           />
+          </div>
           <div class="profile__info-container">
             <div class="profile__username-container">
               <h1 class="profile__username">Жак-Ив Кусто</h1>
@@ -43,7 +45,7 @@
         <section class="content"></section>
       </main>
       <footer class="footer">
-        <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+        <p class="footer__copyright">&copy; 2022 Mesto Russia. Саша Харькова</p>
       </footer>
 
       <div class="popup popup_edit-profile">
@@ -51,14 +53,24 @@
           <form class="popup__form" name="edit" novalidate>
             <h2 class="popup__title">Редактировать профиль</h2>
             <fieldset class="popup__inputs">
-              <input required minlength="2" maxlength="40" id="username" name="username"
+              <input
+                required
+                minlength="2"
+                maxlength="40"
+                id="username"
+                name="username"
                 class="popup__input popup__input_el_name"
                 type="text"
                 placeholder="Введите имя"
                 value=""
               />
               <span class="popup__error" id="username-error"></span>
-              <input required minlength="2" maxlength="200" id="about" name="about"
+              <input
+                required
+                minlength="2"
+                maxlength="200"
+                id="about"
+                name="about"
                 class="popup__input popup__input_el_job"
                 type="text"
                 placeholder="Расскажите о себе"
@@ -81,20 +93,28 @@
           <form class="popup__form" name="addphoto" novalidate>
             <h2 class="popup__title">Новое место</h2>
             <fieldset class="popup__inputs">
-              <input required minlength="2" maxlength="30" id="cardname" name="cardname"
+              <input
+                required
+                minlength="2"
+                maxlength="30"
+                id="cardname"
+                name="cardname"
                 class="popup__input popup__input_el_place-name"
                 type="text"
                 placeholder="Название"
                 value=""
               />
               <span class="popup__error" id="cardname-error"></span>
-              <input required id="cardlink" name="cardlink"
+              <input
+                required
+                id="cardlink"
+                name="cardlink"
                 class="popup__input popup__input_el_link"
                 type="url"
                 placeholder="Ссылка на картинку"
                 value=""
               />
-              <span class="popup__error" id="cardlink-error">добавь ссылку</span>
+              <span class="popup__error" id="cardlink-error"></span>
             </fieldset>
             <button class="popup__save-button" type="submit">Создать</button>
           </form>
@@ -108,8 +128,11 @@
 
       <div class="popup popup_for-image">
         <figure class="popup__container-image">
-
-          <img class="popup__image" src="./images/сousteau.png" alt="Фото в полноэкранном режиме" />
+          <img
+            class="popup__image"
+            src="./images/сousteau.png"
+            alt="Фото в полноэкранном режиме"
+          />
           <figcaption class="popup__place-name"></figcaption>
           <button
             class="popup__close-button"
@@ -118,11 +141,43 @@
           ></button>
         </figure>
       </div>
+
+      <div class="popup popup_edit-avatar">
+        <div class="popup__container">
+          <form class="popup__form" name="editavatar" novalidate>
+            <h2 class="popup__title">Изменить аватар</h2>
+            <fieldset class="popup__inputs">
+              <input
+                required
+                id="avatarlink"
+                name="avatarlink"
+                class="popup__input"
+                type="url"
+                placeholder="Ссылка на новый аватар"
+                value=""
+              />
+              <span class="popup__error" id="avatarlink-error"></span>
+            </fieldset>
+            <button class="popup__save-button" type="submit">Создать</button>
+          </form>
+          <button
+            class="popup__close-button"
+            aria-label="Закрыть"
+            type="button"
+          ></button>
+        </div>
+      </div>
     </div>
+
+
 
     <template class="template-add-photo">
       <div class="content__card">
-        <img class="content__photo" src="./images/сousteau.png" alt="Фото, добавленное пользователем" />
+        <img
+          class="content__photo"
+          src="./images/сousteau.png"
+          alt="Фото, добавленное пользователем"
+        />
         <div class="content__like-container">
           <p class="content__place-name"></p>
           <button
@@ -144,4 +199,3 @@
     <script defer src="./scripts/index.js"></script>
   </body>
 </html>
-Z

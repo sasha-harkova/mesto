@@ -2,10 +2,12 @@ const popups = document.querySelectorAll(".popup");
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const popupAddCard = document.querySelector(".popup_add-card");
 const popupForImage = document.querySelector(".popup_for-image");
+const popupEditAvatar = document.querySelector(".popup_edit-avatar");
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileAddButton = document.querySelector(".profile__add-button");
 const popupSaveButton = document.querySelector(".popup__save-button");
 const popupCloseButtons = document.querySelectorAll(".popup__close-button");
+const popupEditAvatarButton = document.querySelector(".profile__avatar-container");
 const profileForm = document.forms.edit;
 const nameInput = profileForm.elements.username;
 const jobInput = profileForm.elements.about;
@@ -18,6 +20,8 @@ const linkPhoto = newCardForm.elements.cardlink;
 const templateAddPhoto = document.querySelector(".template-add-photo").content;
 const popupImage = document.querySelector(".popup__image");
 const popupPlaceName = document.querySelector(".popup__place-name");
+const newAvatarForm = document.forms.editavatar;
+const linkForNewAvatar = newAvatarForm.elements.avatarlink;
 
 
 function openPopup(popup) {
@@ -36,6 +40,12 @@ function openPopupAddCard() {
   openPopup(popupAddCard);
   newCardForm.reset();
   clearInputError(popupAddCard);
+};
+
+function openPopupEditAvatar() {
+  openPopup(popupEditAvatar);
+  newAvatarForm.reset();
+  clearInputError(popupEditAvatar);
 };
 
 function closePopup(popup) {
@@ -60,6 +70,14 @@ function handleSaveProfile(evt) {
   closeEachPopup();
   handleDeactivateButtonAtForm(evt);
 };
+
+function handleEditAvatar(evt) {
+  evt.preventDefault();
+  const avatar = document.querySelector(".profile__avatar");
+  avatar.src = linkForNewAvatar.value;
+  closeEachPopup();
+  handleDeactivateButtonAtForm(evt);
+}
 
 function setEventListenersToCard(evt) {
   const eventTarget = evt.target;
@@ -109,26 +127,19 @@ function handleAddNewCard(evt) {
   handleDeactivateButtonAtForm(evt);
 };
 
-profileEditButton.addEventListener("click", openPopupEditProfile);
-profileAddButton.addEventListener("click", openPopupAddCard);
-popupCloseButtons.forEach(btn => btn.addEventListener("click", closeEachPopup));
-popups.forEach(item => item.addEventListener("click", handleClosePopupByClickingOverlay));
-profileForm.addEventListener("submit", handleSaveProfile);
-newCardForm.addEventListener("submit", handleAddNewCard);
-
-
-function deactivateButton(buttonElement) {
-  buttonElement.classList.add("popup__save-button_disabled");
-};
-
-function handleDeactivateButtonAtForm(evt) {
-  const buttonElement = evt.target.querySelector(".popup__save-button");
-  deactivateButton(buttonElement);
-};
-
 function closePopupByClickingEscape(evt) {
   if (evt.key === "Escape") {
     const popup = document.querySelector(".popup_opened");
     closePopup(popup);
   }
 };
+
+profileEditButton.addEventListener("click", openPopupEditProfile);
+profileAddButton.addEventListener("click", openPopupAddCard);
+popupEditAvatarButton.addEventListener("click", openPopupEditAvatar);
+popupCloseButtons.forEach(btn => btn.addEventListener("click", closeEachPopup));
+popups.forEach(item => item.addEventListener("click", handleClosePopupByClickingOverlay));
+profileForm.addEventListener("submit", handleSaveProfile);
+newCardForm.addEventListener("submit", handleAddNewCard);
+newAvatarForm.addEventListener("submit", handleEditAvatar);
+
