@@ -32,7 +32,7 @@ export default class Card {
   }
 
   _handleDeleteCard() {
-    this._deleteButton.closest(".content__card").remove();
+    this._contentCard.remove();
   }
 
   _handlePreviewPicture() {
