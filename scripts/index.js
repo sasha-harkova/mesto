@@ -1,8 +1,7 @@
 const popups = document.querySelectorAll(".popup");
-const popupEditProfile = document.querySelector(".popup_edit-profile");
-const popupAddCard = document.querySelector(".popup_add-card");
-const popupForImage = document.querySelector(".popup_for-image");
-const popupEditAvatar = document.querySelector(".popup_edit-avatar");
+const popupEditProfile = document.querySelector(".popup_type_edit-profile");
+const popupAddCard = document.querySelector(".popup_type_add-card");
+const popupEditAvatar = document.querySelector(".popup_type_edit-avatar");
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileAddButton = document.querySelector(".profile__add-button");
 const popupCloseButtons = document.querySelectorAll(".popup__close-button");
@@ -33,48 +32,24 @@ const objForValidation = {
 }
 
 function activateValidation(popup) {
-  const form = popup.querySelector(`${objForValidation.formSelector}`);
-  const inputList = Array.from(form.querySelectorAll(`${objForValidation.inputSelector}`));
-  inputList.forEach((input) => {
-    const validation = new FormValidator(input, objForValidation);
-    validation.enableValidation();
-  })
+  const form = popup.querySelector('.popup__form');
+  const validation = new FormValidator(objForValidation, form);
+  validation.enableValidation();
 }
-
-//------------ОЧИЩЕНИЕ ИНПУТОВ И ОШИБОК ПОСЛЕ ВАЛИДАЦИИ------------//
-
-
-function clearInputAndError(popup) {
-    const formElement = popup.querySelector('.popup__form');
-    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-    const inputErrorList = Array.from(formElement.querySelectorAll('.popup__error'));
-    formElement.reset()
-    inputList.forEach(inputElement => {
-      inputElement.classList.remove('popup__input_type_error');
-    });
-    inputErrorList.forEach(errorElement => {
-      errorElement.textContent = "";
-      errorElement.classList.remove('popup__error_visible');
-    });
-};
 
 //------------ДЕАКТИВИРОВАНИЕ КНОПКИ------------//
 
 function deactivateButtonAtForm(popup) {
-  const button = popup.querySelector(".popup__save-button");
-  button.classList.add("popup__save-button_disabled");
-  button.setAttribute("disabled", "disabled");
+  const form = popup.querySelector('.popup__form');
+  const validation = new FormValidator(objForValidation, form);
+  validation.deactivateButton();
 }
 
 //------------ОТКРЫТИЕ ПОПАПОВ------------//
 
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", closePopupByClickingEscape);
-}
+import { openPopup, closePopup } from "./open-and-close-popup.js"
 
 function openPopupWithForm(popup) {
-  clearInputAndError(popup);
   deactivateButtonAtForm(popup);
   activateValidation(popup);
   openPopup(popup);
@@ -96,25 +71,14 @@ function openPopupEditAvatar() {
 
 //------------ЗАКРЫТИЕ ПОПАПОВ------------//
 
-function closePopup(popup) {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", closePopupByClickingEscape);
-}
-
-function closeEachPopup() {
-  popups.forEach((item) => closePopup(item));
+function closePopupAfterSubmit(evt) {
+  const popup = evt.target.closest('.popup');
+  closePopup(popup);
 }
 
 function handleClosePopupByClickingOverlay(evt) {
-  if (evt.target == evt.currentTarget) {
+  if (evt.target === evt.currentTarget) {
     closePopup(evt.target);
-  }
-}
-
-function closePopupByClickingEscape(evt) {
-  if (evt.key === "Escape") {
-    const popup = document.querySelector(".popup_opened");
-    closePopup(popup);
   }
 }
 
@@ -124,14 +88,14 @@ function handleSaveProfile(evt) {
   evt.preventDefault();
   userName.textContent = nameInput.value;
   userDescription.textContent = jobInput.value;
-  closeEachPopup();
+  closePopupAfterSubmit(evt);
 }
 
 function handleEditAvatar(evt) {
   evt.preventDefault();
   const avatar = document.querySelector(".profile__avatar");
   avatar.src = linkForNewAvatar.value;
-  closeEachPopup();
+  closePopupAfterSubmit(evt);
 }
 
 //------------ДОБАВЛЕНИЕ НОВОЙ КАРТОЧКИ------------//
@@ -139,15 +103,10 @@ function handleEditAvatar(evt) {
 import initialCards from "./cards.js";
 import Card from "./Card.js";
 
-function openPreviewPicture(card) {
-  card.querySelector(".content__photo").addEventListener("click", () => openPopup(popupForImage));
-}
-
 function addCard(photo, caption) {
   const newCard = new Card(photo, caption, ".template-add-photo");
   const newCardElement = newCard.createCard();
   content.prepend(newCardElement);
-  openPreviewPicture(newCardElement);
 }
 
 function addCardFromArray() {
@@ -158,14 +117,17 @@ addCardFromArray();
 function handleAddNewCard(evt) {
   evt.preventDefault();
   addCard(linkPhoto.value, placeName.value,);
-  closeEachPopup();
+  closePopupAfterSubmit(evt);
 }
 
 
 profileEditButton.addEventListener("click", openPopupEditProfile);
 profileAddButton.addEventListener("click", openPopupAddCard);
 popupEditAvatarButton.addEventListener("click", openPopupEditAvatar);
-popupCloseButtons.forEach((btn) => btn.addEventListener("click", closeEachPopup));
+popupCloseButtons.forEach((btn) => {
+  const popup = btn.closest('.popup');
+  btn.addEventListener("click", () => closePopup(popup));
+});
 popups.forEach((item) => item.addEventListener("click", handleClosePopupByClickingOverlay));
 profileForm.addEventListener("submit", handleSaveProfile);
 newCardForm.addEventListener("submit", handleAddNewCard);
