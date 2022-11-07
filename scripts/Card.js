@@ -1,6 +1,8 @@
+const popupForImage = document.querySelector(".popup_type_for-image");
 const popupImage = document.querySelector(".popup__image");
 const popupPlaceName = document.querySelector(".popup__place-name");
 
+import { openPopup } from "./open-and-close-popup.js";
 
 export default class Card {
   constructor(photo, caption, templateSelector) {
@@ -39,6 +41,7 @@ export default class Card {
     popupImage.src = this._contentPhoto.src;
     popupImage.alt = this._contentPhoto.alt;
     popupPlaceName.textContent = this._contentPlaceName.textContent;
+    openPopup(popupForImage);
   }
 
   _setEventListeners() {
