@@ -1,3 +1,8 @@
+import FormValidator from "./FormValidator.js"
+import { openPopup, closePopup } from "./open-and-close-popup.js"
+import initialCards from "./cards.js";
+import Card from "./Card.js";
+
 const popups = document.querySelectorAll(".popup");
 const popupEditProfile = document.querySelector(".popup_type_edit-profile");
 const popupAddCard = document.querySelector(".popup_type_add-card");
@@ -18,10 +23,6 @@ const linkPhoto = newCardForm.elements.cardlink;
 const newAvatarForm = document.forms.editavatar;
 const linkForNewAvatar = newAvatarForm.elements.avatarlink;
 
-//------------ВКЛЮЧЕНИЕ ВАЛИДАЦИИ------------//
-
-import FormValidator from "./FormValidator.js"
-
 const objForValidation = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -31,42 +32,32 @@ const objForValidation = {
   errorClass: 'popup__error_visible'
 }
 
-function activateValidation(popup) {
-  const form = popup.querySelector('.popup__form');
-  const validation = new FormValidator(objForValidation, form);
-  validation.enableValidation();
-}
-
-//------------ДЕАКТИВИРОВАНИЕ КНОПКИ------------//
-
-function deactivateButtonAtForm(popup) {
-  const form = popup.querySelector('.popup__form');
-  const validation = new FormValidator(objForValidation, form);
-  validation.deactivateButton();
-}
-
 //------------ОТКРЫТИЕ ПОПАПОВ------------//
 
-import { openPopup, closePopup } from "./open-and-close-popup.js"
-
-function openPopupWithForm(popup) {
-  deactivateButtonAtForm(popup);
-  activateValidation(popup);
-  openPopup(popup);
-}
-
 function openPopupEditProfile() {
-  openPopupWithForm(popupEditProfile);
+  openPopup(popupEditProfile);
+  const form = popupEditProfile.querySelector('.popup__form');
+  const validation = new FormValidator(objForValidation, form);
+  validation.enableValidation();
+  validation.deactivateButton();
   nameInput.value = userName.textContent;
   jobInput.value = userDescription.textContent;
 }
 
 function openPopupAddCard() {
-  openPopupWithForm(popupAddCard);
+  openPopup(popupAddCard);
+  const form = popupAddCard.querySelector('.popup__form');
+  const validation = new FormValidator(objForValidation, form);
+  validation.enableValidation();
+  validation.deactivateButton();
 }
 
 function openPopupEditAvatar() {
-  openPopupWithForm(popupEditAvatar);
+  openPopup(popupEditAvatar);
+  const form = popupEditAvatar.querySelector('.popup__form');
+  const validation = new FormValidator(objForValidation, form);
+  validation.enableValidation();
+  validation.deactivateButton();
 }
 
 //------------ЗАКРЫТИЕ ПОПАПОВ------------//
@@ -100,9 +91,6 @@ function handleEditAvatar(evt) {
 
 //------------ДОБАВЛЕНИЕ НОВОЙ КАРТОЧКИ------------//
 
-import initialCards from "./cards.js";
-import Card from "./Card.js";
-
 function addCard(photo, caption) {
   const newCard = new Card(photo, caption, ".template-add-photo");
   const newCardElement = newCard.createCard();
@@ -110,7 +98,9 @@ function addCard(photo, caption) {
 }
 
 function addCardFromArray() {
-  initialCards.forEach((item) => addCard(item.link, item.name));
+  initialCards.forEach((item) => {
+    addCard(item.link, item.name);
+  });
 }
 addCardFromArray();
 
