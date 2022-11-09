@@ -32,32 +32,39 @@ const objForValidation = {
   errorClass: 'popup__error_visible'
 }
 
+//------------ВАЛИДАЦИЯ ФОРМ------------//
+
+const validationNewCardForm = new FormValidator(objForValidation, newCardForm);
+validationNewCardForm.enableValidation();
+
+const validationProfileForm = new FormValidator(objForValidation, profileForm);
+validationProfileForm.enableValidation();
+
+const validationNewAvatarForm = new FormValidator(objForValidation, newAvatarForm);
+validationNewAvatarForm.enableValidation();
+
 //------------ОТКРЫТИЕ ПОПАПОВ------------//
 
-function openPopupEditProfile() {
-  openPopup(popupEditProfile);
-  const form = popupEditProfile.querySelector('.popup__form');
+function openPopupWithForm(popup) {
+  openPopup(popup);
+  const form = popup.querySelector('.popup__form');
   const validation = new FormValidator(objForValidation, form);
-  validation.enableValidation();
   validation.deactivateButton();
+  validation.clearInputAndError();
+}
+
+function openPopupEditProfile() {
+  openPopupWithForm(popupEditProfile);
   nameInput.value = userName.textContent;
   jobInput.value = userDescription.textContent;
 }
 
 function openPopupAddCard() {
-  openPopup(popupAddCard);
-  const form = popupAddCard.querySelector('.popup__form');
-  const validation = new FormValidator(objForValidation, form);
-  validation.enableValidation();
-  validation.deactivateButton();
+  openPopupWithForm(popupAddCard);
 }
 
 function openPopupEditAvatar() {
-  openPopup(popupEditAvatar);
-  const form = popupEditAvatar.querySelector('.popup__form');
-  const validation = new FormValidator(objForValidation, form);
-  validation.enableValidation();
-  validation.deactivateButton();
+  openPopupWithForm(popupEditAvatar);
 }
 
 //------------ЗАКРЫТИЕ ПОПАПОВ------------//
