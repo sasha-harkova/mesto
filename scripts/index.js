@@ -45,26 +45,25 @@ validationNewAvatarForm.enableValidation();
 
 //------------ОТКРЫТИЕ ПОПАПОВ------------//
 
-function openPopupWithForm(popup) {
-  openPopup(popup);
-  const form = popup.querySelector('.popup__form');
-  const validation = new FormValidator(objForValidation, form);
-  validation.deactivateButton();
-  validation.clearInputAndError();
-}
 
 function openPopupEditProfile() {
-  openPopupWithForm(popupEditProfile);
+  openPopup(popupEditProfile);
+  validationProfileForm.deactivateButton();
+  validationProfileForm.clearInputAndError();
   nameInput.value = userName.textContent;
   jobInput.value = userDescription.textContent;
 }
 
 function openPopupAddCard() {
-  openPopupWithForm(popupAddCard);
+  openPopup(popupAddCard);
+  validationNewCardForm.deactivateButton();
+  validationNewCardForm.clearInputAndError();
 }
 
 function openPopupEditAvatar() {
-  openPopupWithForm(popupEditAvatar);
+  openPopup(popupEditAvatar);
+  validationNewAvatarForm.deactivateButton();
+  validationNewAvatarForm.clearInputAndError();
 }
 
 //------------ЗАКРЫТИЕ ПОПАПОВ------------//
