@@ -35,8 +35,7 @@ export default class FormValidator {
     this._buttonElement.removeAttribute("disabled", "disabled");
   }
 
-  clearInputAndError() {
-    this._formElement.reset()
+  clearInputError() {
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
