@@ -1,14 +1,9 @@
-import { openPopup } from "./open-and-close-popup.js";
-
-const popupForImage = document.querySelector(".popup_type_for-image");
-const popupImage = document.querySelector(".popup__image");
-const popupPlaceName = document.querySelector(".popup__place-name");
-
 export default class Card {
-  constructor(photo, caption, templateSelector) {
+  constructor(photo, caption, templateSelector, { handleCardClick }) {
     this._photo = photo;
     this._caption = caption;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   createCard() {
@@ -37,13 +32,6 @@ export default class Card {
     this._contentCard.remove();
   }
 
-  _handlePreviewPicture() {
-    popupImage.src = this._contentPhoto.src;
-    popupImage.alt = this._contentPhoto.alt;
-    popupPlaceName.textContent = this._contentPlaceName.textContent;
-    openPopup(popupForImage);
-  }
-
   _setEventListeners() {
     this._likeButton = this._contentCard.querySelector(".content__like");
     this._deleteButton = this._contentCard.querySelector(".content__delete");
@@ -51,6 +39,6 @@ export default class Card {
 
     this._likeButton.addEventListener("click", () => this._handleLikeIcon());
     this._deleteButton.addEventListener("click", () => this._handleDeleteCard());
-    this._contentPhoto.addEventListener("click", () => this._handlePreviewPicture());
+    this._contentPhoto.addEventListener("click", () => this._handleCardClick());
   }
 }
