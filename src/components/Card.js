@@ -30,6 +30,7 @@ export default class Card {
 
   _handleDeleteCard() {
     this._contentCard.remove();
+    this._contentCard = null;
   }
 
   _setEventListeners() {
