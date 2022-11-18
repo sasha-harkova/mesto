@@ -10,11 +10,12 @@
   position: absolute;
   top: 0;
   left: 0;
+  background: rgba(0, 0, 0, .6) url(../../../images/edit.svg) no-repeat center;
+  background-size: 30px 30px;
+  opacity: 0;
 }
 
 .profile__avatar-container:hover:after {
-  background: rgba(0, 0, 0, .6) url(../../../images/edit.svg) no-repeat center;
-  background-size: 30px 30px;
-  transition: background 0.3s ease-in-out;
-
+  opacity: 1;
+  transition: all .3s ease;
 }

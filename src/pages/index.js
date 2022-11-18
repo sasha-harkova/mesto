@@ -10,14 +10,36 @@ import {
   profileEditButton,
   cardAddButton,
   popupEditAvatarButton,
-  avatar, profileForm,
+  profileForm,
   nameInput,
   aboutInput,
   newCardForm,
   newAvatarForm,
-  linkForNewAvatar,
+  avatarInput,
   objForValidation
 } from "../utils/constans.js"
+
+
+//------------УНИВЕРСАЛЬНАЯ ФУНКЦИЯ ДОБАВЛЕНИЯ КАРТОЧКИ------------//
+
+function addCard(photo, caption) {
+  const card = new Card(photo, caption, ".template-add-photo", { handleCardClick: () => {
+    popupWithImage.open(photo, caption);
+  } });
+  const cardElement = card.createCard();
+  return cardElement;
+}
+
+//------------ДОБАВЛЕНИЕ КАРТОЧЕК ИЗ МАССИВА------------//
+
+const renderedCard = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const cardElement = addCard(item.link, item.name);
+    renderedCard.addItem(cardElement)
+  }
+},'.content');
+renderedCard.renderItems();
 
 //------------ВАЛИДАЦИЯ ФОРМ------------//
 
@@ -35,28 +57,26 @@ validationNewAvatarForm.enableValidation();
 const popupWithImage = new PopupWithImage('.popup_type_for-image');
 popupWithImage.setEventListeners();
 
-const userInfo = new UserInfo({usernameSelecor: ".profile__username", aboutSelector: ".profile__user-description"});
-
 //------------ПОПАП РЕДАКТИРОВАНИЯ ПРОФИЛЯ------------//
 
+const userInfo = new UserInfo({usernameSelecor: ".profile__username", aboutSelector: ".profile__user-description", avatarSelector: ".profile__avatar"});
+
 const popupEditProfile = new PopupWithForm(".popup_type_edit-profile", { handleFormSubmit: () => {
-  userInfo.setUserInfo(nameInput, aboutInput)
+  userInfo.setUserInfo(nameInput, aboutInput);
 } });
 popupEditProfile.setEventListeners();
 
 //------------ПОПАП РЕДАКТИРОВАНИЯ АВАТАРА------------//
 
 const popupEditAvatar = new PopupWithForm(".popup_type_edit-avatar", { handleFormSubmit: () => {
-  avatar.src = linkForNewAvatar.value;
+  userInfo.setAvatar(avatarInput);
 } });
 popupEditAvatar.setEventListeners();
 
+//------------ПОПАП ДОБАВЛЕНИЯ НОВОЙ КАРТОЧКИ------------//
+
 const popupAddCard = new PopupWithForm(".popup_type_add-card", { handleFormSubmit: (formData) => {
-  const renderedCard = new Section({formData},'.content');
-  const card = new Card(formData.cardlink, formData.cardname, ".template-add-photo", { handleCardClick: () => {
-    popupWithImage.open(formData.cardlink, formData.cardname);
-  } });
-  const cardElement = card.createCard();
+  const cardElement = addCard(formData.cardlink, formData.cardname);
   renderedCard.addItem(cardElement);
 } });
 popupAddCard.setEventListeners();
@@ -83,17 +103,3 @@ popupEditAvatarButton.addEventListener("click", () => {
 cardAddButton.addEventListener("click", () => {
   openPopupWithForm(validationNewCardForm, popupAddCard);
 });
-
-//------------ДОБАВЛЕНИЕ КАРТОЧЕК ИЗ МАССИВА------------//
-
-const cardFromArray = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const card = new Card(item.link, item.name, ".template-add-photo", {handleCardClick: () => {
-      popupWithImage.open(item.link, item.name);
-    }});
-    const cardElement = card.createCard();
-    cardFromArray.addItem(cardElement)
-  }
-},'.content');
-cardFromArray.renderItems();
