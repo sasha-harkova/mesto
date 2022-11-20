@@ -22,7 +22,7 @@ import {
 
 //------------УНИВЕРСАЛЬНАЯ ФУНКЦИЯ ДОБАВЛЕНИЯ КАРТОЧКИ------------//
 
-function addCard(photo, caption) {
+function createCard(photo, caption) {
   const card = new Card(photo, caption, ".template-add-photo", { handleCardClick: () => {
     popupWithImage.open(photo, caption);
   } });
@@ -32,14 +32,14 @@ function addCard(photo, caption) {
 
 //------------ДОБАВЛЕНИЕ КАРТОЧЕК ИЗ МАССИВА------------//
 
-const renderedCard = new Section({
+const cardsContainer = new Section({
   items: initialCards,
   renderer: (item) => {
-    const cardElement = addCard(item.link, item.name);
-    renderedCard.addItem(cardElement)
+    const cardElement = createCard(item.link, item.name);
+    cardsContainer.addItem(cardElement)
   }
 },'.content');
-renderedCard.renderItems();
+cardsContainer.renderItems();
 
 //------------ВАЛИДАЦИЯ ФОРМ------------//
 
@@ -76,8 +76,8 @@ popupEditAvatar.setEventListeners();
 //------------ПОПАП ДОБАВЛЕНИЯ НОВОЙ КАРТОЧКИ------------//
 
 const popupAddCard = new PopupWithForm(".popup_type_add-card", { handleFormSubmit: (formData) => {
-  const cardElement = addCard(formData.cardlink, formData.cardname);
-  renderedCard.addItem(cardElement);
+  const cardElement = createCard(formData.cardlink, formData.cardname);
+  cardsContainer.addItem(cardElement);
 } });
 popupAddCard.setEventListeners();
 
