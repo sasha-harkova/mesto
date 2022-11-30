@@ -9,6 +9,7 @@
   top: 20px;
   right: 20px;
   cursor: pointer;
+  display: none;
 }
 
 .content__delete:hover {

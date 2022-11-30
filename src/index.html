@@ -157,7 +157,7 @@
               />
               <span class="popup__error" id="avatarlink-error"></span>
             </fieldset>
-            <button class="popup__save-button" type="submit">Создать</button>
+            <button class="popup__save-button" type="submit">Сохранить</button>
           </form>
           <button
             class="popup__close-button"
@@ -166,7 +166,23 @@
           ></button>
         </div>
       </div>
+
+      <div class="popup popup_type_are-you-sure">
+        <div class="popup__container">
+          <form class="popup__form" name="areyousure" novalidate>
+            <h2 class="popup__title popup__title_type_small-margin">Вы уверены?</h2>
+            <button class="popup__save-button" type="submit">Да</button>
+          </form>
+          <button
+            class="popup__close-button"
+            aria-label="Закрыть"
+            type="button"
+          ></button>
+        </div>
+      </div>
+
     </div>
+
 
 
 
@@ -177,13 +193,17 @@
           src="<%=require('./images/сousteau.png')%>"
           alt="Фото, добавленное пользователем"
         />
-        <div class="content__like-container">
+        <div class="content__caption-container">
           <p class="content__place-name"></p>
-          <button
-            class="content__like"
-            aria-label="Поставить лайк на фото"
-            type="button"
-          ></button>
+          <div class="content__like-container">
+            <button
+              class="content__like"
+              aria-label="Поставить лайк на фото"
+              type="button"
+            ></button>
+            <p class="content__like-sum">0</p>
+          </div>
+
         </div>
         <button
           class="content__delete"
