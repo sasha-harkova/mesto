@@ -39,6 +39,7 @@ function renderLoading(isLoading, popup) {
   }
 }
 
+
 //------------ПОЛУЧЕНИЕ ИНФОРМАЦИИ ПОЛЬЗОВАТЕЛЯ С СЕРВЕРА------------//
 
 let userId;
