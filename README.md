@@ -3,7 +3,9 @@
 This is a social networking site where **you can post photos, like them, delete them and edit your profile**.
 
 Here were used:
-* basic JavaScript;
+* JavaScript;
+* OOP;
+* Webpack
 * grid layout;
 * flexbox layout;
 * adaptive layout;

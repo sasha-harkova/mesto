@@ -1,10 +1,9 @@
-.content__like-container {
+.content__caption-container {
   background: white;
-  padding-top: 25px;
   padding-left: 21px;
   padding-right: 21px;
-  padding-bottom: 26px;
   border-radius: 0 0 10px 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
