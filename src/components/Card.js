@@ -20,6 +20,9 @@ export default class Card {
       .content
       .querySelector(".content__card")
       .cloneNode(true);
+
+
+
     this._setEventListeners()
 
     this._contentPlaceName = this._contentCard.querySelector(".content__place-name");
@@ -36,12 +39,12 @@ export default class Card {
       this._deleteButton.style.display = 'block';
     }
 
+
     this._likesArr.forEach((element) => {
       if(element._id === this._userId) {
         this._likeButton.classList.add("content__like_active");
       }
     });
-
 
     this._likesSum.textContent = this._likesSumFromData;
 
@@ -51,16 +54,15 @@ export default class Card {
 
   _handleLikeIcon(evt) {
     if (evt.target.classList.contains('content__like_active')) {
-      this._removeLike(this.id).then(() => {
+      this._removeLike(this.id, () => {
         this._likeButton.classList.remove("content__like_active");
         this._likesSum.textContent = +this._likesSum.textContent - 1;
-      });
-    } else this._addLike(this.id).then(() => {
-      this._likeButton.classList.add("content__like_active");
-      this._likesSum.textContent = +this._likesSum.textContent + 1;
-    });
+      })
+    } else this._addLike(this.id, () => {
+        this._likeButton.classList.add("content__like_active");
+        this._likesSum.textContent = +this._likesSum.textContent + 1;
+    })
   }
-
 
   _handleDeleteCard() {
     this._deleteCard(this.id, () => {

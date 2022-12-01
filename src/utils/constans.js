@@ -6,7 +6,6 @@ export const nameInput = profileForm.elements.username;
 export const aboutInput = profileForm.elements.about;
 export const newCardForm = document.forms.addphoto;
 export const newAvatarForm = document.forms.editavatar;
-export const avatarInput = newAvatarForm.elements.avatarlink;
 
 export const objForValidation = {
   formSelector: '.popup__form',
