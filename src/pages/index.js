@@ -64,10 +64,12 @@ const deleteCard = (id, deleteElement) => {
   popupOfDeletion.setSubmitAction(() => {
     popupOfDeletion.renderLoading(true);
     api.deleteCard(id)
-      .then(() => deleteElement())
+      .then(() => {
+        deleteElement();
+        popupOfDeletion.close();
+      })
       .catch((error) => console.log(`Ошибка при удалении карточки: ${error}`))
       .finally(() => popupOfDeletion.renderLoading(false));
-      popupOfDeletion.close()
   });
 };
 
@@ -112,10 +114,12 @@ const userInfo = new UserInfo({usernameSelecor: ".profile__username", aboutSelec
 const popupEditProfile = new PopupWithForm(".popup_type_edit-profile", { handleFormSubmit: (formData) => {
   popupEditProfile.renderLoading(true);
   api.setUserInfo({ name: formData.username, about: formData.about })
-    .then((user) => userInfo.setUserInfo(user))
+    .then((user) => {
+      userInfo.setUserInfo(user);
+      popupEditProfile.close();
+    })
     .catch((error) => console.log(`Ошибка при изменении информации пользователя: ${error}`))
     .finally(() => popupEditProfile.renderLoading(false))
-    popupEditProfile.close()
 } });
 popupEditProfile.setEventListeners();
 
@@ -125,10 +129,12 @@ popupEditProfile.setEventListeners();
 const popupEditAvatar = new PopupWithForm(".popup_type_edit-avatar", { handleFormSubmit: (formData) => {
   popupEditAvatar.renderLoading(true);
   api.setAvatar( { avatar: formData.avatarlink } )
-    .then((user) => userInfo.setUserAvatar(user))
+    .then((user) => {
+      userInfo.setUserAvatar(user);
+      popupEditAvatar.close();
+    })
     .catch((error) => console.log(`Ошибка при изменении аватара пользователя: ${error}`))
     .finally(() => popupEditAvatar.renderLoading(false))
-    popupEditAvatar.close();
 } });
 popupEditAvatar.setEventListeners();
 
@@ -141,10 +147,10 @@ const popupAddCard = new PopupWithForm(".popup_type_add-card", { handleFormSubmi
     .then((card) => {
       const cardElement = createCard(card);
       cardsContainer.addNewItem(cardElement);
+      popupAddCard.close();
     })
     .catch((error) => console.log(`Ошибка при добавлении новой карточки: ${error}`))
     .finally(() => popupAddCard.renderLoading(false))
-  popupAddCard.close();
 } });
 popupAddCard.setEventListeners();
 
